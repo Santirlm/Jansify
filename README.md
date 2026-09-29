@@ -1,8 +1,36 @@
 # Jansify
 
-Reproductor de música de escritorio en WPF (.NET 8) con patrón MVVM: usuarios con login y rol de administrador, artistas, álbumes, canciones, playlists, biblioteca, búsqueda e informes en PDF.
+Reproductor de música de escritorio para Windows, inspirado en Spotify. Desarrollado en C# con WPF siguiendo el patrón **MVVM**, con base de datos MySQL a través de Entity Framework Core.
 
-**Tecnologías:** C#, WPF, Entity Framework Core (Pomelo MySQL), NAudio, QuestPDF, BCrypt.
+## Funcionalidades
+
+- **Login con roles.** Contraseñas cifradas con BCrypt y dos roles, usuario y administrador.
+- **Reproductor.** Reproduce, pausa y pasa a la canción siguiente o anterior (NAudio).
+- **Buscador** de canciones con filtro en tiempo real, y opción de añadir el resultado a una playlist.
+- **Biblioteca.** Crear, reproducir y borrar playlists propias.
+- **Informes en PDF.** Exporta una playlist a PDF con su listado de canciones, artistas, álbumes y duración (QuestPDF).
+- **Panel de administración** para gestionar usuarios y sus roles.
+
+## Tecnologías
+
+| | |
+|---|---|
+| Lenguaje | C# (.NET 8) |
+| Interfaz | WPF, XAML, MVVM (`BaseViewModel`, `RelayCommand`) |
+| Datos | Entity Framework Core 9, Pomelo MySQL, migraciones |
+| Librerías | NAudio, QuestPDF, BCrypt.Net, Xaml.Behaviors |
+
+## Estructura
+
+```
+Jansify_Santiago_Ramirez/
+├── Models/       Entidades (Usuario, Artista, Album, Cancion, Playlist) y DbContext
+├── Services/     Acceso a datos, un servicio por entidad
+├── Helpers/      Autenticación e informes PDF
+├── ViewModels/   Lógica de cada pantalla y del reproductor
+├── Views/        Vistas XAML
+└── Migrations/   Migraciones de EF Core
+```
 
 ## Puesta en marcha
 
@@ -11,5 +39,14 @@ Reproductor de música de escritorio en WPF (.NET 8) con patrón MVVM: usuarios 
    ```
    setx JANSIFY_DB "Server=localhost;Database=jansify_db;User=usuario;Password=contraseña;"
    ```
-3. Aplica las migraciones: `dotnet ef database update`
+3. Aplica las migraciones:
+   ```
+   dotnet ef database update
+   ```
 4. Abre `Jansify_Santiago_Ramirez.sln` en Visual Studio y ejecuta.
+
+La primera vez se crea un administrador con usuario `Admin` y contraseña `Admin`.
+
+---
+
+Proyecto del ciclo DAM/DAW · **Santiago Ramírez**
